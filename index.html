@@ -17,10 +17,10 @@
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{background:#000;width:100%;height:100%;display:flex;justify-content:center;align-items:center;overflow:hidden;position:fixed;top:0;left:0;font-family:'Press Start 2P',monospace;touch-action:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
   canvas{image-rendering:pixelated;image-rendering:crisp-edges;display:block}
-  #pad{display:none;touch-action:none;justify-content:space-between;align-items:center;background:#111;padding:6px 14px;height:78px;border-top:1px solid #333}
-  .cbtn{width:52px;height:52px;border-radius:12px;background:rgba(255,255,255,.13);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-family:'Press Start 2P',monospace;-webkit-user-select:none;user-select:none}
+  #pad{display:none;touch-action:none;justify-content:space-between;align-items:center;background:#111;padding:8px 14px;border-top:1px solid #333;flex-shrink:0}
+  .cbtn{width:46px;height:46px;border-radius:10px;background:rgba(255,255,255,.13);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-family:'Press Start 2P',monospace;-webkit-user-select:none;user-select:none}
   .cbtn:active{background:rgba(255,255,255,.35)}
-  #bfire{width:68px;height:68px;border-radius:50%;background:rgba(255,68,68,.35);color:#F44;font-size:11px}
+  #bfire{width:64px;height:64px;border-radius:50%;background:rgba(255,68,68,.35);color:#F44;font-size:11px}
   #bfire:active{background:rgba(255,68,68,.6)}
 </style>
 <script>
@@ -53,7 +53,7 @@ const GW=480,GH=640;let scale=1;
 const isMobile=('ontouchstart'in window)||(navigator.maxTouchPoints>0);
 const padEl=document.getElementById('pad');
 const padKeys={};
-function resize(){const vw=innerWidth,vh=innerHeight;const padH=isMobile?84:0;const availH=vh-padH;scale=Math.min(vw/GW,availH/GH);canvas.width=GW;canvas.height=GH;canvas.style.width=GW*scale+'px';canvas.style.height=GH*scale+'px';if(isMobile){padEl.style.display='flex';padEl.style.width=Math.min(GW*scale,vw)+'px';}}
+function resize(){const vw=innerWidth,vh=innerHeight;const padH=isMobile?116:0;const availH=vh-padH;scale=Math.min(vw/GW,availH/GH);canvas.width=GW;canvas.height=GH;canvas.style.width=GW*scale+'px';canvas.style.height=GH*scale+'px';if(isMobile){padEl.style.display='flex';padEl.style.width=Math.min(GW*scale,vw)+'px';}}
 resize();addEventListener('resize',resize);addEventListener('orientationchange',()=>setTimeout(resize,200));
 if(isMobile){function setupBtn(id,key){const el=document.getElementById(id);el.addEventListener('touchstart',e=>{e.preventDefault();e.stopPropagation();padKeys[key]=true;initAudio();},{passive:false});el.addEventListener('touchend',e=>{e.preventDefault();e.stopPropagation();padKeys[key]=false;},{passive:false});el.addEventListener('touchcancel',e=>{padKeys[key]=false;});}
 setupBtn('bl','ArrowLeft');setupBtn('br','ArrowRight');setupBtn('bu','ArrowUp');setupBtn('bd','ArrowDown');setupBtn('bfire','fire');}
@@ -109,7 +109,7 @@ function mkStars(){s1=[];s2=[];s3=[];for(let i=0;i<40;i++)s1.push({x:Math.random
 mkStars();
 let neb=[];function mkNeb(){neb=[];for(let i=0;i<8;i++)neb.push({x:Math.random()*GW,y:Math.random()*GH,r:80+Math.random()*120,sp:.1+Math.random()*.3});}mkNeb();
 
-let pl={x:GW/2,y:GH-60,w:32,h:24,spd:4.6,alive:true,inv:0};
+let pl={x:GW/2,y:GH-60,w:32,h:24,spd:4.7,alive:true,inv:0};
 let bul=[],ebul=[],ens=[],expl=[],pups=[],pts=[];
 let canShoot=true,shootCD=0;
 let ef={ox:0,dir:1,mt:0},diveT=0,shake=0;
